@@ -1,6 +1,6 @@
 # clang-mute
 
-Tool to comment out all function (and method) implementation in specific files.
+Tool to comment out all function (and method) implementations in specific files.
 
 ```
 echo 'void f(){ int x=1; }' > main.cpp
