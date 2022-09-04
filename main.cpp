@@ -86,7 +86,7 @@ int main(int argc, const char** argv) {
         }
     };
 
-    auto Rule = makeRule(functionDecl(hasBody(compoundStmt(hasDescendant(stmt())).bind("body"))),
+    auto Rule = makeRule(functionDecl(hasBody(compoundStmt(hasDescendant(stmt()), isExpansionInMainFile()).bind("body"))),
                          flatten(insertBefore(statements("body"), cat("\n#if 0\n")),
                                  insertAfter(statements("body"), cat("\n#endif\n"))));
 
