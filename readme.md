@@ -17,7 +17,7 @@ void f(){
 # Use
 
 ```
-clang-mute target1.cpp [target2.cpp] [-- -I/includepath -Ddefinition]
+clang-mute target1.cpp [target2.cpp] [-- -Iincludepath -Ddefinition]
 ```
 
 # Build
