@@ -23,6 +23,7 @@ jobs:
         popd
         copy /y ..\main.cpp clang\tools\clang-mute
         copy /y ..\CMakeLists.txt clang\tools\clang-mute
+        copy /y ..\version.h.in clang\tools\clang-mute
         if not exist "build" mkdir "build"
         pushd build
         cmake -DLLVM_ENABLE_PROJECTS="clang" -DCMAKE_BUILD_TYPE=Release -G Ninja -D CMAKE_C_COMPILER=cl -D CMAKE_CXX_COMPILER=cl ../llvm

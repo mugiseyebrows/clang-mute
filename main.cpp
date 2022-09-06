@@ -13,6 +13,7 @@
 #include "llvm/Support/Signals.h"
 #include "llvm/Support/raw_ostream.h"
 #include "clang/Tooling/CommonOptionsParser.h"
+#include "version.h"
 
 using namespace clang;
 using namespace tooling;
@@ -60,8 +61,12 @@ bool applySourceChanges(const AtomicChanges& Changes) {
     return false;
 }
 
-int main(int argc, const char** argv) {
+static void PrintVersion(raw_ostream &OS) {
+  OS << "clang-mute " << CLANG_MUTE_VERSION << '\n';
+}
 
+int main(int argc, const char** argv) {
+    llvm::cl::SetVersionPrinter(PrintVersion);
     auto ExpectedParser = CommonOptionsParser::create(argc, argv, Category);
     if (!ExpectedParser) {
         llvm::errs() << ExpectedParser.takeError();
