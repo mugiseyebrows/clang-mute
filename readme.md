@@ -2,6 +2,8 @@
 
 Tool to comment out all function (and method) implementations in specific files.
 
+Also tutorial for clang's libtooling for source to source transformation.
+
 ```
 echo 'void f(){ int x=1; }' > main.cpp
 clang-mute main.cpp 
@@ -52,6 +54,10 @@ clang-mute ../mainwindow.cpp
 
 # Build
 
+To compile you need llvm-project distribution which you can `git clone` from repository or `curl` from llvm-project [releases](https://github.com/llvm/llvm-project/releases).
+
+See also: `build.sh` file and `build.bat` file.
+
 ## Ubuntu
 
 ```bash
@@ -64,12 +70,13 @@ cd ../..
 mkdir build
 cd build
 cmake -DLLVM_ENABLE_PROJECTS="clang" -DCMAKE_BUILD_TYPE=Release -G Ninja ../llvm
-ninja clang-mute
+cmake --build . --target clang-mute
 sudo cp bin/clang-mute /usr/bin
 ```
 
 ## Windows
 
+(Common steps for MinGW and Visual Studio)
 - Install [ninja](https://ninja-build.org/)
 - Add ninja to `%PATH%`
 - Clone sources
@@ -86,20 +93,24 @@ cd build
 
 ### Visual Studio
 
+- Use visual studio command prompt or call `vcvars64.bat`
+- Build using cmake
+
 ```bash
+call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64.bat"
 cmake -DLLVM_ENABLE_PROJECTS="clang" -DCMAKE_BUILD_TYPE=Release -G Ninja ../llvm
-ninja clang-mute
+cmake --build . --target clang-mute
 ```
 
 ### MinGW
 
 - Add compiler to `%PATH%`
+- Build using cmake
 
 ```bash
 cmake -DLLVM_ENABLE_PROJECTS="clang" -DCMAKE_BUILD_TYPE=Release -G Ninja -D CMAKE_C_COMPILER=gcc -D CMAKE_CXX_COMPILER=g++ ../llvm
-ninja clang-mute
+cmake --build . --target clang-mute
 ```
-
 
 # See also
 

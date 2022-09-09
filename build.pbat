@@ -5,6 +5,7 @@ def main
     download(https://github.com/llvm/llvm-project/releases/download/llvmorg-15.0.0-rc3/llvm-project-15.0.0rc3.src.tar.xz, llvm-project-15.0.0rc3.src.tar.xz)
     if not exist llvm-project (
         mkdir llvm-project
+        echo "extracting llvm-project-15.0.0rc3.src.tar.xz please wait"
         tar xf llvm-project-15.0.0rc3.src.tar.xz --directory=llvm-project --strip-components=1   
     )
     pushd llvm-project
@@ -18,7 +19,7 @@ def main
         mkdir(build)
         pushd build
             cmake -DLLVM_ENABLE_PROJECTS="clang" -DCMAKE_BUILD_TYPE=Release -G Ninja -D CMAKE_C_COMPILER=cl -D CMAKE_CXX_COMPILER=cl ../llvm
-            ninja clang-mute
+            cmake --build . --target clang-mute
         popd
     popd
     github_upload(clang-mute, llvm-project\build\bin\clang-mute.exe)
